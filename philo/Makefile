@@ -6,7 +6,8 @@ SRCS				= main.c\
 						ft_free_list.c\
 						ft_run_threads.c\
 						ft_philo.c\
-						ft_log.c	
+						ft_log.c\
+						ft_get_time.c	
 OBJS				= $(SRCS:.c=.o)
 
 CC					= cc

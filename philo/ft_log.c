@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:29 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/09 16:49:28 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:05:47 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 static void	ft_log(char *log, t_philo *philo)
 {
-	struct timeval	now;
-	
-	gettimeofday(&now, NULL);
 	pthread_mutex_lock(&(philo->args->print));
-	printf("%8ld %d %s\n", (now.tv_usec - philo->start.tv_usec)/1000, philo->id, log);
+	printf("%8ld %3d %s\n", ft_get_time(philo->start), philo->id, log);
 	pthread_mutex_unlock(&(philo->args->print));
 }
 

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo.c                                         :+:      :+:    :+:   */
+/*   ft_get_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/09 17:07:21 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/09 17:02:14 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/09 17:03:41 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ft_philo(void *ptr)
+long	ft_get_time(struct timeval time)
 {
-	t_philo	*philo;
+	struct timeval	now;
 	
-	philo = (t_philo *) ptr;
-	ft_log_thinking(philo);
-	return (NULL);
+	gettimeofday(&now, NULL);
+	return ((now.tv_usec - time.tv_usec)/1000);
 }
