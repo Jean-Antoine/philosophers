@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_list.c                                     :+:      :+:    :+:   */
+/*   ft_get_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 13:03:54 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/09 13:24:18 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/09 17:02:14 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/14 13:05:49 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_free_list(t_philo *philo)
+long	ft_get_time(struct timeval time)
 {
-	t_philo	*node;
-	t_philo	*temp;
+	struct timeval	now;
 
-	if (!philo)
-		return ;
-	node = philo;
-	while (node && node->next != philo)
-	{
-		temp = node;
-		node = node->next;
-		free(temp);
-	}
-	free(node);
+	gettimeofday(&now, NULL);
+	return (((now.tv_sec - time.tv_sec) * 1000)
+		+ ((now.tv_usec - time.tv_usec) / 1000));
 }

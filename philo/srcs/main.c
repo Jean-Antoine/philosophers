@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_run_threads.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 14:13:01 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/09 16:39:06 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/08 14:00:49 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/14 16:28:55 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_run_threads(t_philo *philo)
+int	main(int ac, char **av)
 {
-	int		n;
+	t_data	data;
+	t_philo	*philo;
 
-	n = philo->args->n;
-	while (n--)
-	{
-		pthread_create(&(philo->thread), NULL, *ft_philo, philo);
-		gettimeofday(&philo->start, NULL);
-		pthread_join(philo->thread, NULL);
-		philo = philo->next;
-	}
-	// n = data->n;
-	// while (n--)
-	// {
-	// 	pthread_join(node->thread, NULL);
-	// 	node = node->next;		
-	// }
+	if (ac < 5 || ac > 6)
+		return (ft_exit(NULL));
+	philo = NULL;
+	if (ft_init_data(ac, av, &data))
+		return (1);
+	philo = ft_init_philo(&data);
+	ft_launch(philo);
+	ft_free_list(philo);
+	pthread_mutex_destroy(&(data.print));
 }
