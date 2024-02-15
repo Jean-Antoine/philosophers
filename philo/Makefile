@@ -12,13 +12,14 @@ SRCS_F				= main.c\
 						ft_get_time.c\
 						ft_eat.c\
 						ft_think.c\
-						ft_sleep.c
+						ft_sleep.c\
+						ft_monitor.c
 OBJS_F				= $(SRCS_F:.c=.o)
 SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))
 CC					= cc
 CPPFLAGS			= -I./include
-CFLAGS				= -Wall -Wextra -Werror -g
+CFLAGS				= -Wall -Wextra -Werror -g -fsanitize=thread
 NAME				= philo
 
 all					: $(NAME)

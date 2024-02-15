@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 09:21:26 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/14 17:06:37 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:53:35 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_philo	*ft_new_philo(int id, t_data *data)
 		free(philo);
 		return (NULL);
 	}
-	if (pthread_mutex_init(&philo->eating, NULL))
+	if (pthread_mutex_init(&philo->started_eating, NULL))
 	{
 		pthread_mutex_destroy(&(philo->fork));
 		free(philo);
@@ -83,5 +83,8 @@ int	ft_init_data(int ac, char **av, t_data *data)
 				"be strictly positive."));
 	if (pthread_mutex_init(&(data->print), NULL))
 		return (ft_exit("pthread_mutex_init: Something went wrong."));
+	if (pthread_mutex_init(&(data->stop_m), NULL))
+		return (ft_exit("pthread_mutex_init: Something went wrong."));
+	data->stop = 0;
 	return (0);
 }
