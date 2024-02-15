@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:03:54 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 10:54:08 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:08:05 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_free_list(t_philo *philo)
 	{
 		temp = node;
 		node = node->next;
-		pthread_mutex_destroy(&(philo->started_eating));
-		pthread_mutex_destroy(&(philo->fork));
+		pthread_mutex_destroy(&(temp->started_eating));
+		pthread_mutex_destroy(&(temp->fork));
 		free(temp);
 	}
 	free(node);
