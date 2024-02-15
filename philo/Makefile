@@ -19,12 +19,13 @@ SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))
 CC					= cc
 CPPFLAGS			= -I./include
-CFLAGS				= -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS				= -Wall -Wextra -Werror
 NAME				= philo
 
 all					: $(NAME)
 
 $(OBJS_D)%.o		: $(SRCS_D)%.c
+					  @mkdir -p $(OBJS_D)
 					  $(CC) $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
 $(NAME)				: $(OBJS)
