@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:29 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 18:49:35 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/16 09:46:41 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_log(char *log, t_philo *philo)
 {
+	if (ft_stop(philo))
+		return ;
 	pthread_mutex_lock(&(philo->data->print));
-	if (!ft_stop(philo))
-		printf("%8ld %3d %s\n", ft_get_time(philo->start), philo->id, log);
+	printf("%8ld %3d %s\n", ft_get_time(philo->start), philo->id, log);
 	pthread_mutex_unlock(&(philo->data->print));
 }

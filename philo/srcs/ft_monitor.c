@@ -6,15 +6,36 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:35:40 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 18:55:46 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:29:31 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void	ft_set_stop(t_data *data)
+{
+	pthread_mutex_lock(&(data->stop_m));
+	data->stop = 1;
+	pthread_mutex_unlock(&(data->stop_m));
+}
+
+static int ft_all_eaten(t_philo *philo)
+{
+	int	n;
+
+	n = philo->data->n;
+	while (n--)
+	{
+		if (philo->n_meal < philo->data->n)
+			return (0);
+		philo = philo->next;
+	}
+	return (1);
+}
+
 void	ft_monitor(t_philo *philo)
 {
-	while (1)
+	while (!ft_all_eaten(philo))
 	{
 		philo = philo->next;
 		pthread_mutex_lock(&(philo->started_eating));
@@ -24,12 +45,8 @@ void	ft_monitor(t_philo *philo)
 			continue ;
 		}
 		pthread_mutex_unlock(&(philo->started_eating));
-		pthread_mutex_lock(&(philo->data->stop_m));
-		philo->data->stop = 1;
-		pthread_mutex_unlock(&(philo->data->stop_m));
-		pthread_mutex_lock(&(philo->data->print));
-		printf("%8ld %3d %s\n", ft_get_time(philo->start), philo->id, "died");
-		pthread_mutex_unlock(&(philo->data->print));
-		return ;
+		ft_log("died", philo);		
+		break ;
 	}
+	ft_set_stop(philo->data);
 }
