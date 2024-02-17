@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:13:01 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 18:58:44 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:14:46 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	ft_launch(t_philo *philo)
 {
-	int		n;
+	int				n;
 
 	n = philo->data->n;
+	gettimeofday(&(philo->data->start), NULL);
 	while (n--)
 	{
-		gettimeofday(&(philo->start), NULL);
-		gettimeofday(&(philo->last_meal), NULL);
+		philo->last_meal.tv_sec = philo->data->start.tv_sec;
+		philo->last_meal.tv_usec = philo->data->start.tv_usec;
 		pthread_create(&(philo->thread), NULL, *ft_philo, philo);
 		philo = philo->next;
 	}

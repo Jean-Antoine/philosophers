@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/16 10:29:46 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:02:46 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*ft_philo(void *ptr)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
-		ft_think(philo, 0);
+		ft_think(philo, philo->data->time_to_eat - philo->data->time_to_sleep);
 	}
 	return (NULL);
 }

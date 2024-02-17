@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 18:44:47 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:40:21 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				n_meal_needed;
+	int				n_meal_min_time;
 	int				stop;
+	struct timeval	start;
 	pthread_mutex_t	print;
 	pthread_mutex_t	stop_m;
 }	t_data;

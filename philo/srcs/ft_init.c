@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 09:21:26 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 11:53:35 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:07:08 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ int	ft_init_data(int ac, char **av, t_data *data)
 	if (pthread_mutex_init(&(data->stop_m), NULL))
 		return (ft_exit("pthread_mutex_init: Something went wrong."));
 	data->stop = 0;
+	data->n_meal_min_time = data->time_to_eat * data->n_meal_needed
+		+ data->time_to_sleep * (data->n_meal_needed - 1);
 	return (0);
 }
