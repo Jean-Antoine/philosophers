@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 12:40:21 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:43:31 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define INT_MAX 2147483647
 
 typedef struct s_data
-{	
+{
 	int				n;
 	int				time_to_die;
 	int				time_to_eat;
@@ -60,5 +60,6 @@ void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo, long ms);
 long	ft_get_time(struct timeval time);
 void	ft_monitor(t_philo *philo);
-int		ft_stop(t_philo *philo);
+int		ft_continue(t_philo *philo);
+void	ft_stop(t_philo *philo);
 #endif

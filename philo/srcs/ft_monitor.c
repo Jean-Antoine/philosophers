@@ -6,18 +6,11 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:35:40 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 13:15:46 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:43:03 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	ft_set_stop(t_data *data)
-{
-	pthread_mutex_lock(&(data->stop_m));
-	data->stop = 1;
-	pthread_mutex_unlock(&(data->stop_m));
-}
 
 static int	ft_n_meal(t_philo *philo)
 {
@@ -39,7 +32,7 @@ static int	ft_last_meal(t_philo *philo)
 	return (last_meal);
 }
 
-static int ft_all_eaten(t_philo *philo)
+static int	ft_all_eaten_enough(t_philo *philo)
 {
 	int	n;
 
@@ -47,7 +40,7 @@ static int ft_all_eaten(t_philo *philo)
 		return (0);
 	if (ft_get_time(philo->start) < philo->data->n_meal_min_time)
 		return (0);
-	n = philo->data->n;	
+	n = philo->data->n;
 	while (n--)
 	{
 		if (ft_n_meal(philo) < philo->data->n_meal_needed)
@@ -59,13 +52,12 @@ static int ft_all_eaten(t_philo *philo)
 
 void	ft_monitor(t_philo *philo)
 {
-	while (!ft_all_eaten(philo))
+	while (!ft_all_eaten_enough(philo))
 	{
 		philo = philo->next;
 		if (ft_last_meal(philo) < philo->data->time_to_die)
 			continue ;
 		ft_log("died", philo);
-		break ;
-	}
-	ft_set_stop(philo->data);
+		return ;
+	}	
 }

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_launch.c                                        :+:      :+:    :+:   */
+/*   ft_continue.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 14:13:01 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 17:41:00 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/15 18:43:44 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/17 17:39:59 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_launch(t_philo *philo)
+int	ft_continue(t_philo *philo)
 {
-	int				n;
+	int	stop;
 
-	n = philo->data->n;
-	gettimeofday(&(philo->data->start), NULL);
-	while (n--)
-	{
-		philo->last_meal.tv_sec = philo->data->start.tv_sec;
-		philo->last_meal.tv_usec = philo->data->start.tv_usec;
-		if(pthread_create(&(philo->thread), NULL, *ft_philo, philo))
-			return ;
-		philo = philo->next;
-	}
-	ft_monitor(philo);
+	pthread_mutex_lock(&(philo->data->stop_m));
+	stop = philo->data->stop;
+	pthread_mutex_unlock(&(philo->data->stop_m));
+	return (!stop);
 }

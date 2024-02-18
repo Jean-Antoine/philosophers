@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 09:36:38 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/14 13:40:00 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:27:41 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_exit(char *msg)
 			"\tThe time a philosopher will spend sleeping.\n"
 			"number_of_times_each_philosopher_must_eat (optional argument):\n"
 			"\tIf all philosophers have eaten at least\n"
-			"\tnumber_of_times_each_philosopher_must_eat times, the simulation\n"
-			"\tstops. If not specified, the simulation stops when a\n"
+			"\tnumber_of_times_each_philosopher_must_eat times, the simu-\n"
+			"\tlation stops. If not specified, the simulation stops when a\n"
 			"\tphilosopher dies.", 2);
 	else
 		ft_putendl_fd(msg, 2);
