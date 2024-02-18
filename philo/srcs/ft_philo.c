@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 17:48:26 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:43:45 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_philo(void *ptr)
 		ft_log("has taken a fork", philo);
 		return (NULL);
 	}
-	if (philo->id % 2)
+	if (!(philo->id % 2))
 		ft_think(philo, philo->data->time_to_eat);
 	while (ft_continue(philo))
 	{

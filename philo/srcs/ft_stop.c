@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:40:25 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 17:43:06 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:23:54 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_set_stop(t_data *data)
 void	ft_stop(t_philo *philo)
 {
 	int	n;
-	
+
 	ft_set_stop(philo->data);
 	n = philo->data->n;
 	while (n--)

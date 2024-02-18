@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:35:40 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 17:43:03 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:29:48 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_all_eaten_enough(t_philo *philo)
 
 	if (philo->data->n_meal_needed == -2)
 		return (0);
-	if (ft_get_time(philo->start) < philo->data->n_meal_min_time)
+	if (ft_get_time(philo->data->start) < philo->data->n_meal_min_time)
 		return (0);
 	n = philo->data->n;
 	while (n--)
@@ -59,5 +59,5 @@ void	ft_monitor(t_philo *philo)
 			continue ;
 		ft_log("died", philo);
 		return ;
-	}	
+	}
 }

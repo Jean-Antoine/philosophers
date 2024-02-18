@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:39:06 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/16 09:55:38 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:48:25 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static pthread_mutex_t	*ft_first(t_philo *philo)
 {
 	if (philo->id % 2)
-		return (&(philo->fork));
-	return (&(philo->next->fork));
+		return (&(philo->next->fork));
+	return (&(philo->fork));
 }
 
 static pthread_mutex_t	*ft_second(t_philo *philo)
 {
 	if (philo->id % 2)
-		return (&(philo->next->fork));
-	return (&(philo->fork));
+		return (&(philo->fork));
+	return (&(philo->next->fork));
 }
 
 void	ft_eat(t_philo *philo)
