@@ -6,38 +6,24 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:39:06 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/18 12:48:25 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:48:12 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static pthread_mutex_t	*ft_first(t_philo *philo)
+void	ft_eat(int id, t_data *data)
 {
-	if (philo->id % 2)
-		return (&(philo->next->fork));
-	return (&(philo->fork));
-}
-
-static pthread_mutex_t	*ft_second(t_philo *philo)
-{
-	if (philo->id % 2)
-		return (&(philo->fork));
-	return (&(philo->next->fork));
-}
-
-void	ft_eat(t_philo *philo)
-{
-	pthread_mutex_lock(ft_first(philo));
-	ft_log("has taken a fork", philo);
-	pthread_mutex_lock(ft_second(philo));
-	ft_log("has taken a fork", philo);
-	ft_log("is eating", philo);
-	pthread_mutex_lock(&(philo->started_eating));
-	gettimeofday(&(philo->last_meal), NULL);
-	philo->n_meal++;
-	pthread_mutex_unlock(&(philo->started_eating));
-	usleep(philo->data->time_to_eat * 1000);
-	pthread_mutex_unlock(ft_second(philo));
-	pthread_mutex_unlock(ft_first(philo));
+	sem_wait(data->forks);
+	ft_log(id, data, "has taken a fork");
+	sem_wait(data->forks);
+	ft_log(id, data, "has taken a fork");
+	ft_log(id, data, "is eating");
+	sem_wait(data->eating);
+	gettimeofday(&(data->last_meal), NULL);
+	data->n_meal++;
+	sem_post(data->eating);
+	usleep(data->time_to_eat * 1000);
+	sem_post(data->forks);
+	sem_post(data->forks);
 }

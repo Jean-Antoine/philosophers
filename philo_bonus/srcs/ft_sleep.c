@@ -6,14 +6,14 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:39:53 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/15 14:10:23 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:03:51 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_sleep(t_philo *philo)
+void	ft_sleep(int id, t_data *data)
 {
-	ft_log("is sleeping", philo);
-	usleep(philo->data->time_to_sleep * 1000);
+	ft_log(id, data, "is sleeping");
+	usleep(data->time_to_sleep * 1000);
 }

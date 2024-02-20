@@ -6,58 +6,39 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:35:40 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/18 12:29:48 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:36:47 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_n_meal(t_philo *philo)
+static void	ft_dead(t_data *data)
 {
-	int	n_meal;
-
-	pthread_mutex_lock(&(philo->started_eating));
-	n_meal = philo->n_meal;
-	pthread_mutex_unlock(&(philo->started_eating));
-	return (n_meal);
+	sem_wait(data->print);
+	printf("%8ld %3d %s\n", ft_get_time(data->start),
+		data->id,
+		"died");
+	ft_exit("", data, DEAD);
 }
 
-static int	ft_last_meal(t_philo *philo)
+void	*ft_monitor(void *arg)
 {
-	int	last_meal;
+	t_data	*data;
+	int		since_last_meal;
+	int		n_meal;
+	int		eaten_enough;
 
-	pthread_mutex_lock(&(philo->started_eating));
-	last_meal = ft_get_time(philo->last_meal);
-	pthread_mutex_unlock(&(philo->started_eating));
-	return (last_meal);
-}
-
-static int	ft_all_eaten_enough(t_philo *philo)
-{
-	int	n;
-
-	if (philo->data->n_meal_needed == -2)
-		return (0);
-	if (ft_get_time(philo->data->start) < philo->data->n_meal_min_time)
-		return (0);
-	n = philo->data->n;
-	while (n--)
+	data = (t_data *)arg;
+	eaten_enough = 0;
+	while (1)
 	{
-		if (ft_n_meal(philo) < philo->data->n_meal_needed)
-			return (0);
-		philo = philo->next;
-	}
-	return (1);
-}
-
-void	ft_monitor(t_philo *philo)
-{
-	while (!ft_all_eaten_enough(philo))
-	{
-		philo = philo->next;
-		if (ft_last_meal(philo) < philo->data->time_to_die)
-			continue ;
-		ft_log("died", philo);
-		return ;
+		sem_wait(data->eating);
+		since_last_meal = ft_get_time(data->last_meal);
+		n_meal = data->n_meal;
+		sem_post(data->eating);
+		if (since_last_meal > data->time_to_die)
+			ft_dead(data);
+		if (n_meal == data->n_meal_needed && !eaten_enough)
+			sem_post()
 	}
 }

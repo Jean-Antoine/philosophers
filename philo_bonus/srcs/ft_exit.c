@@ -6,13 +6,13 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 09:36:38 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/18 16:34:04 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:38:29 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_exit(char *msg, t_data *data)
+void	ft_exit(char *msg, t_data *data, int exit_code)
 {
 	if (!msg)
 		ft_putendl_fd("Usage: ./philo 	[number_of_philosophers] "
@@ -34,9 +34,9 @@ int	ft_exit(char *msg, t_data *data)
 			"\tnumber_of_times_each_philosopher_must_eat times, the simu-\n"
 			"\tlation stops. If not specified, the simulation stops when a\n"
 			"\tphilosopher dies.", 2);
-	else
+	else if (msg && msg[0])
 		ft_putendl_fd(msg, 2);
 	if (data)
 		ft_free_data(data);
-	exit (EXIT_FAILURE);
+	exit (exit_code);
 }

@@ -14,8 +14,7 @@ SRCS_F				= main.c\
 						ft_think.c\
 						ft_sleep.c\
 						ft_monitor.c\
-						ft_continue.c\
-						ft_stop.c
+						ft_wait.c
 OBJS_F				= $(SRCS_F:.c=.o)
 SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))

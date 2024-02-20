@@ -6,26 +6,31 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/18 17:32:55 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:43 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static
+
 void	ft_philo(int id, t_data *data)
 {
-	free(data->philo);
+	pthread_t	monitor;
+
+	sem_wait()
 	data->id = id;
-	// if (data->n == 1)
-	// {
-	// 	ft_log("has taken a fork", philo);
-	// 	exit (EXIT_SUCCESS);
-	// }
-	while (ft_continue(philo))
+	data->eating = sem_open("eating", O_CREAT, S_IRWXU, 1);
+	sem_unlink("eating");
+	pthread_create(&monitor, NULL, *ft_monitor, (void *)data);
+	if (id % 2)
+		usleep(data->time_to_eat);		
+	while (1)
 	{
-		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo, philo->data->time_to_eat - philo->data->time_to_sleep);
+		ft_eat(id, data);
+		ft_sleep(id, data);
+		ft_think(id, data, data->time_to_eat - data->time_to_sleep);
 	}
-	return (NULL);
+	pthread_join(monitor, NULL);
+	ft_free_data(data);
 }
