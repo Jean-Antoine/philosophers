@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_arg.c                                     :+:      :+:    :+:   */
+/*   ft_free_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 08:47:09 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/21 15:13:57 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/21 15:18:05 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/22 09:42:31 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_isdigit(int c)
+void	ft_free_philo(t_philo *philo)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	ft_parse_arg(const char *nptr)
-{
-	unsigned int	out;
-
-	if (!nptr || !*nptr)
-		return (-1);
-	out = 0;
-	while (*nptr)
-	{
-		if (!ft_isdigit(*nptr))
-			return (-1);
-		out = out * 10 + (*nptr++ - '0');
-		if (out > INT_MAX)
-			return (-1);
-	}
-	if (out == 0)
-		return (-1);
-	return ((int) out);
+	if (philo->eating && philo->eating != SEM_FAILED)
+		sem_close(philo->eating);
+	if (philo->dead && philo->dead != SEM_FAILED)
+		sem_close(philo->dead);
+	return ;
 }

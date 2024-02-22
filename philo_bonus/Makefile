@@ -4,8 +4,10 @@ SRCS_F				= main.c\
 						ft_putendl_fd.c\
 						ft_exit.c\
 						ft_parse_arg.c\
-						ft_init.c\
+						ft_init_data.c\
+						ft_init_philo.c\
 						ft_free_data.c\
+						ft_free_philo.c\
 						ft_launch.c\
 						ft_philo.c\
 						ft_log.c\
@@ -14,7 +16,9 @@ SRCS_F				= main.c\
 						ft_think.c\
 						ft_sleep.c\
 						ft_monitor.c\
-						ft_wait.c
+						ft_wait.c\
+						ft_kill.c\
+						ft_dead.c
 OBJS_F				= $(SRCS_F:.c=.o)
 SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))

@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:27:19 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/20 12:03:41 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:37:02 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	ft_free_data(t_data *data)
 {
-	(void) data;
 	if (data->philo)
 		free(data->philo);
 	if (data->forks && data->forks != SEM_FAILED)
 		sem_close(data->forks);
 	if (data->print && data->print != SEM_FAILED)
 		sem_close(data->print);
-	if (data->eating && data->eating != SEM_FAILED)
-		sem_close(data->eating);
+	if (data->all_eaten && data->all_eaten != SEM_FAILED)
+		sem_close(data->all_eaten);
+	if (data->kill && data->kill != SEM_FAILED)
+		sem_close(data->kill);
 	return ;
 }

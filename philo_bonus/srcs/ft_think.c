@@ -6,15 +6,15 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:40:25 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/19 12:03:05 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:13:02 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_think(int id, t_data *data, long ms)
+void	ft_think(t_philo *philo, t_data *data, long ms)
 {
-	ft_log(id, data, "is thinking");
+	ft_log(philo, data, "is thinking");
 	if (ms > 0)
 		usleep(ms * 1000);
 }

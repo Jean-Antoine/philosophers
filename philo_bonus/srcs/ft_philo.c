@@ -6,31 +6,29 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/20 14:33:43 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:48:57 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static
-
 void	ft_philo(int id, t_data *data)
 {
 	pthread_t	monitor;
+	pthread_t	kill;
+	t_philo		philo;
 
-	sem_wait()
-	data->id = id;
-	data->eating = sem_open("eating", O_CREAT, S_IRWXU, 1);
-	sem_unlink("eating");
-	pthread_create(&monitor, NULL, *ft_monitor, (void *)data);
-	if (id % 2)
-		usleep(data->time_to_eat);		
-	while (1)
+	ft_init_philo(id, &philo, data);
+	pthread_create(&monitor, NULL, *ft_monitor, (void *)&philo);
+	pthread_create(&kill, NULL, *ft_kill, (void *)&philo);
+	usleep(data->args.time_to_eat * (id % 2));
+	while (!ft_dead(&philo))
 	{
-		ft_eat(id, data);
-		ft_sleep(id, data);
-		ft_think(id, data, data->time_to_eat - data->time_to_sleep);
+		ft_eat(&philo, data);
+		ft_sleep(&philo, data);
+		ft_think(&philo, data, 0);
 	}
 	pthread_join(monitor, NULL);
-	ft_free_data(data);
+	pthread_join(kill, NULL);
+	ft_exit(MSG_EMPTY, data, &philo);
 }
