@@ -15,7 +15,9 @@ SRCS_F				= main.c\
 						ft_eat.c\
 						ft_think.c\
 						ft_sleep.c\
-						ft_monitor.c\
+						ft_monitor_eaten_enough.c\
+						ft_monitor_killed.c\
+						ft_monitor_death.c\
 						ft_wait.c\
 						ft_kill.c\
 						ft_is_dead.c\

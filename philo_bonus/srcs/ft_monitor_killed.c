@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_continue.c                                      :+:      :+:    :+:   */
+/*   ft_monitor_killed.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 18:43:44 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 17:39:59 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/26 17:01:32 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/26 18:16:38 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_continue(t_philo *philo)
-{
-	int	stop;
+static void	ft_wait_kill_signal(t_data *data)
+{	
+	sem_wait(data->kill);
+	sem_post(data->kill);
+}
 
-	pthread_mutex_lock(&(philo->data->stop_m));
-	stop = philo->data->stop;
-	pthread_mutex_unlock(&(philo->data->stop_m));
-	return (!stop);
+void	*ft_monitor_killed(void *args)
+{
+	t_philo	*philo;
+	t_data	*data;
+
+	philo = (t_philo *) args;
+	data = philo->data;
+	ft_wait_kill_signal(data);
+	sem_wait(data->print);
+	sem_wait(philo->dead);
+	philo->stop = 1;
+	sem_post(philo->dead);
+	sem_post(data->print);
+	sem_post(data->all_eaten);
+	return (NULL);
 }
