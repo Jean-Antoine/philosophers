@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/22 10:23:25 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:37:49 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	sem_t			*print;
 	sem_t			*forks;
 	sem_t			*kill;
+	sem_t			*before_fork;
 	pid_t			*philo;
 }	t_data;
 
@@ -81,9 +82,10 @@ void	ft_think(t_philo *philo, t_data *data, long ms);
 long	ft_get_time(struct timeval time);
 void	*ft_monitor(void *arg);
 void	*ft_kill(void *args);
-int		ft_dead(t_philo *philo);
+int		ft_is_dead(t_philo *philo);
 
 //EXIT
+void	ft_send_kill_signal(t_data *data);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_exit(int msg, t_data *data, t_philo *philo);
 #endif

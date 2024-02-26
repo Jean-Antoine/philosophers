@@ -18,7 +18,8 @@ SRCS_F				= main.c\
 						ft_monitor.c\
 						ft_wait.c\
 						ft_kill.c\
-						ft_dead.c
+						ft_is_dead.c\
+						ft_send_kill_signal.c
 OBJS_F				= $(SRCS_F:.c=.o)
 SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))
@@ -28,6 +29,8 @@ CFLAGS				= -Wall -Wextra -Werror -g
 NAME				= philo
 
 all					: $(NAME)
+
+bonus				: $(NAME)
 
 $(OBJS_D)%.o		: $(SRCS_D)%.c
 					  @mkdir -p $(OBJS_D)
