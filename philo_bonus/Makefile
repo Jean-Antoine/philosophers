@@ -19,7 +19,6 @@ SRCS_F				= main.c\
 						ft_monitor_killed.c\
 						ft_monitor_death.c\
 						ft_wait.c\
-						ft_kill.c\
 						ft_is_dead.c\
 						ft_send_kill_signal.c
 OBJS_F				= $(SRCS_F:.c=.o)

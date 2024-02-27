@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 10:38:47 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:10:00 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ void	ft_philo(int id, t_data *data)
 	sem_wait(data->all_eaten);
 	ft_init_philo(id, &philo, data);
 	ft_run_monitors(monitor, &philo);
-	usleep(data->args.time_to_eat * (id % 2));
+	if (!(id % 2))
+		ft_think(&philo, data, data->args.time_to_eat);
+	if (data->args.odd && id == 0)
+		usleep(data->args.time_to_eat * 1000);
 	while (!ft_is_dead(&philo))
 	{
 		ft_eat(&philo, data);
 		ft_sleep(&philo, data);
-		ft_think(&philo, data, 0);
+		ft_think(&philo, data, data->args.time_to_think);
 	}
 	ft_join_monitors(monitor, &philo);
 	ft_exit(MSG_EMPTY, data, &philo);
