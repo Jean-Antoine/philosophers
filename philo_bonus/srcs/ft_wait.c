@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:47:19 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/26 18:31:51 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:00:12 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	*ft_monitor_all_eaten(void *args)
 
 	data = (t_data *) args;
 	n = data->args.n;
-	// usleep(data->args.n_meal_min_time * 1000);
 	while (n--)
 		sem_wait(data->all_eaten);
 	ft_send_kill_signal(data);

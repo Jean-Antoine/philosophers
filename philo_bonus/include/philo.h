@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/26 17:04:40 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:00:55 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_data
 	sem_t			*print;
 	sem_t			*forks;
 	sem_t			*kill;
-	sem_t			*before_fork;
+	sem_t			*pre_fork;
 	pid_t			*philo;
 }	t_data;
 
