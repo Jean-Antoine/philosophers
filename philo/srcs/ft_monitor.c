@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:35:40 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 11:08:36 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:51:27 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_monitor(t_philo *philo)
 		philo = philo->next;
 		if (ft_last_meal(philo) <= philo->data->time_to_die)
 			continue ;
-		printf("philo %d last meal %d\n", philo->id, ft_last_meal(philo));
 		ft_log("died", philo);
 		return ;
 	}

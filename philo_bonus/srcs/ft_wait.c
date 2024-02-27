@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:47:19 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 10:00:12 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:37:21 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	ft_wait(int n, t_data *data)
 	int			status;
 
 	i = 0;
-	pthread_create(&all_eaten, NULL, ft_monitor_all_eaten, (void *)data);
+	if (data->args.n_meal_needed > 0)
+		pthread_create(&all_eaten, NULL, ft_monitor_all_eaten, (void *)data);
 	while (i < n)
 		waitpid(data->philo[i++], &status, 0);
-	pthread_join(all_eaten, NULL);
+	if (data->args.n_meal_needed > 0)
+		pthread_join(all_eaten, NULL);
 	return ;
 }

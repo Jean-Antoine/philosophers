@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/26 18:24:36 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:38:47 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 static void	ft_run_monitors(pthread_t *monitor, t_philo *philo)
 {
 	pthread_create(monitor++, NULL, *ft_monitor_death, (void *) philo);
-	pthread_create(monitor++, NULL, *ft_monitor_eaten_enough, (void *) philo);
-	pthread_create(monitor, NULL, *ft_monitor_killed, (void *) philo);
+	pthread_create(monitor++, NULL, *ft_monitor_killed, (void *) philo);
+	if (philo->data->args.n_meal_needed > 0)
+		pthread_create(monitor, NULL, *ft_monitor_eaten_enough, (void *) philo);
 }
 
-static void	ft_join_monitors(pthread_t *monitor)
+static void	ft_join_monitors(pthread_t *monitor, t_philo *philo)
 {
 	pthread_join(monitor[0], NULL);
 	pthread_join(monitor[1], NULL);
-	pthread_join(monitor[2], NULL);
+	if (philo->data->args.n_meal_needed > 0)
+		pthread_join(monitor[2], NULL);
 }
 
 void	ft_philo(int id, t_data *data)
@@ -42,6 +44,6 @@ void	ft_philo(int id, t_data *data)
 		ft_sleep(&philo, data);
 		ft_think(&philo, data, 0);
 	}
-	ft_join_monitors(monitor);
+	ft_join_monitors(monitor, &philo);
 	ft_exit(MSG_EMPTY, data, &philo);
 }
