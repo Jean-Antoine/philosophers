@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:39:06 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 10:00:55 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:45:25 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_eat(t_philo *philo, t_data *data)
 {
-	sem_wait(data->pre_fork);
 	sem_wait(data->forks);
 	ft_log(philo, data, "has taken a fork");
 	sem_wait(data->forks);
@@ -27,5 +26,4 @@ void	ft_eat(t_philo *philo, t_data *data)
 	usleep(data->args.time_to_eat * 1000);
 	sem_post(data->forks);
 	sem_post(data->forks);
-	sem_post(data->pre_fork);
 }

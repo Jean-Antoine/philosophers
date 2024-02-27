@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:13:01 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 14:29:07 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:40:43 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ft_launch(int n, t_data *data)
 		if (data->philo[n] == 0)
 			ft_philo(n, data);
 	}
-	// usleep(data->args.time_to_die * 1000);
+	usleep(data->args.time_to_die * 1000);
 }
