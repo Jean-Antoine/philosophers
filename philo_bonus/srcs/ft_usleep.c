@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_think.c                                         :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 15:40:25 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/28 16:06:03 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/28 14:30:59 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/28 16:10:57 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_think(t_philo *philo, t_data *data, long ms)
+void	ft_usleep(t_philo *philo, int ms)
 {
-	ft_log(philo, data, "is thinking");
-	ft_usleep(philo, ms);
+	struct timeval	start;
+
+	if (ms < 0)
+		return ;
+	gettimeofday(&start, NULL);
+	while (ft_get_time(start) < ms)
+	{
+		usleep(1000);
+		if (ft_is_dead(philo))
+			break ;
+	}
 }

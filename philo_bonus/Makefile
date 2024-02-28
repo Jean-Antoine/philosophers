@@ -20,7 +20,8 @@ SRCS_F				= main.c\
 						ft_monitor_death.c\
 						ft_wait.c\
 						ft_is_dead.c\
-						ft_send_kill_signal.c
+						ft_send_kill_signal.c\
+						ft_usleep.c
 OBJS_F				= $(SRCS_F:.c=.o)
 SRCS				= $(addprefix $(SRCS_D), $(SRCS_F))
 OBJS				= $(addprefix $(OBJS_D), $(OBJS_F))

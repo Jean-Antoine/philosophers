@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:39:53 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/22 10:12:48 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:05:15 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_sleep(t_philo *philo, t_data *data)
 {
 	ft_log(philo, data, "is sleeping");
-	usleep(data->args.time_to_sleep * 1000);
+	ft_usleep(philo, data->args.time_to_sleep);
 }

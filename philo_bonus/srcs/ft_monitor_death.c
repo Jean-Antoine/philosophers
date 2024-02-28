@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:01:03 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/26 18:24:44 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:54:33 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 static void	*ft_die(t_philo *philo, t_data *data)
 {
 	sem_wait(data->print);
+	sem_wait(philo->dead);
+	ft_send_kill_signal(data);
 	if (!philo->stop)
 		printf("%8ld %3d %s\n", ft_get_time(data->start),
 			philo->id,
-			"died");
-	ft_send_kill_signal(data);
-	sem_wait(philo->dead);
+			"died");	
 	philo->stop = 1;
 	sem_post(philo->dead);
 	sem_post(data->print);
+	sem_post(philo->eating);
 	return (NULL);
 }
 
@@ -39,10 +40,9 @@ void	*ft_monitor_death(void *args)
 	{
 		sem_wait(philo->eating);
 		last_meal = ft_get_time(philo->last_meal);
-		sem_post(philo->eating);
 		if (last_meal >= data->args.time_to_die)
 			return (ft_die(philo, data));
-		usleep(data->args.time_to_die - last_meal);
+		sem_post(philo->eating);
 	}
 	return (NULL);
 }

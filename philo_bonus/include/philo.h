@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 16:45:45 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:48:25 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	*ft_monitor_eaten_enough(void *args);
 int		ft_is_dead(t_philo *philo);
 
 //CROSS
+void	ft_usleep(t_philo *philo, int ms);
 void	ft_send_kill_signal(t_data *data);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_exit(int msg, t_data *data, t_philo *philo);

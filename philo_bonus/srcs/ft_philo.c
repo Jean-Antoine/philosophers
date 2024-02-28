@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/28 11:26:31 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:46:19 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_philo(int id, t_data *data)
 	if (!(id % 2))
 		ft_think(&philo, data, data->args.time_to_eat);
 	if (data->args.odd && id == 0)
-		usleep(data->args.time_to_eat * 1000);
+		ft_usleep(&philo, data->args.time_to_eat);
 	while (!ft_is_dead(&philo))
 	{
 		ft_eat(&philo, data);
