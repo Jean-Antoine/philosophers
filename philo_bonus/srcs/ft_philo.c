@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:24:20 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/27 16:40:32 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:26:31 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_philo(int id, t_data *data)
 	pthread_t	monitor[3];
 	t_philo		philo;
 
-	sem_wait(data->kill);
-	sem_wait(data->all_eaten);
 	ft_init_philo(id, &philo, data);
 	ft_run_monitors(monitor, &philo);
 	if (!(id % 2))

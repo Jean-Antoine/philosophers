@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 09:21:26 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/17 13:25:30 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:03:03 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_philo	*ft_init_philo(t_data *data)
 	return (list);
 }
 
-int	ft_init_data(int ac, char **av, t_data *data)
+static int	ft_parse(int ac, char **av, t_data *data)
 {
 	data->n = ft_parse_arg(av[1]);
 	data->time_to_die = ft_parse_arg(av[2]);
@@ -76,6 +76,13 @@ int	ft_init_data(int ac, char **av, t_data *data)
 		|| data->time_to_eat == -1
 		|| data->time_to_sleep == -1
 		|| data->n_meal_needed == -1)
+		return (1);
+	return (0);
+}
+
+int	ft_init_data(int ac, char **av, t_data *data)
+{
+	if (ft_parse(ac, av, data))
 		return (ft_exit("Error: All args must be strictly numeric, "
 				"positive and fit into an integer."));
 	if (data->n == 0)
@@ -87,5 +94,8 @@ int	ft_init_data(int ac, char **av, t_data *data)
 	data->stop = 0;
 	data->n_meal_min_time = data->time_to_eat * data->n_meal_needed
 		+ data->time_to_sleep * (data->n_meal_needed - 1);
+	data->odd = data->n % 2;
+	data->time_to_think = data->time_to_eat * (1 + data->odd)
+		- data->time_to_sleep;
 	return (0);
 }
