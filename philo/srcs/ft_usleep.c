@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 14:00:49 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/28 15:19:46 by jeada-si         ###   ########.fr       */
+/*   Created: 2024/02/28 14:30:59 by jeada-si          #+#    #+#             */
+/*   Updated: 2024/02/28 14:37:32 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	ft_usleep(t_philo *philo, int ms)
 {
-	t_data	data;
-	t_philo	*philo;
+	struct timeval	start;
 
-	if (ac < 5 || ac > 6)
-		return (ft_exit(NULL));
-	philo = NULL;
-	if (ft_init_data(ac, av, &data))
-		return (1);
-	philo = ft_init_philo(&data);
-	if (!philo)
-		return (1);
-	ft_launch(philo);
-	ft_wait(philo);
-	ft_free_list(philo);
-	pthread_mutex_destroy(&(data.print));
-	pthread_mutex_destroy(&(data.stop_m));
+	gettimeofday(&start, NULL);
+	while (ft_get_time(start) < ms)
+	{
+		usleep(1000);
+		if (!ft_continue(philo))
+			break ;
+	}
 }

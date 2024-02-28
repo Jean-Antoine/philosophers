@@ -6,7 +6,7 @@
 /*   By: jeada-si <jeada-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:00:46 by jeada-si          #+#    #+#             */
-/*   Updated: 2024/02/28 12:58:14 by jeada-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:47:26 by jeada-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo, long ms);
 long	ft_get_time(struct timeval time);
+void	*ft_monitor_meal(void *args);
 void	ft_monitor(t_philo *philo);
+void	ft_send_kill_signal(t_data *data);
 int		ft_continue(t_philo *philo);
-void	ft_stop(t_philo *philo);
+void	ft_wait(t_philo *philo);
+void	ft_usleep(t_philo *philo, int ms);
 #endif
